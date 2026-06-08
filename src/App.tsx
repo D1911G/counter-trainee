@@ -1,30 +1,30 @@
 import { useState } from "react";
 import Button from "./components/Button";
+import Screen from "./components/Screen";
 
 export default function App() {
-  const [total, setTotal] = useState(0);
+  const [count, setCount] = useState(0);
 
   const incrementHandler = () => {
-    setTotal(total + 1);
+    setCount(count + 1);
   };
 
   const resetHandler = () => {
-    setTotal(0);
+    setCount(0);
   };
 
   return (
     <div>
-      <h1 style={{ color: total === 5 ? "red" : "" }}>{total}</h1>
-      {/* в отдельный компонент восрать */}
+      <Screen count={count}></Screen>
       <Button
         title={"inc"}
         callBack={incrementHandler}
-        disabled={total === 5} //упрощенный вид
+        disabled={count === 5} // упрощенная версия
       ></Button>
       <Button
         title={"reset"}
         callBack={resetHandler}
-        disabled={total === 0 ? true : false}
+        disabled={count === 0 ? true : false} //полная, чтобы ты не тупил
       ></Button>
     </div>
   );

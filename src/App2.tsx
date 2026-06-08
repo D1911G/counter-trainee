@@ -1,21 +1,22 @@
 import { useState } from "react";
 import Button from "./components/Button";
 import Modal from "./components/Modal";
+import Screen from "./components/Screen";
 
 export default function App2() {
   const [modalToggle, setModalToggle] = useState(false);
-  const [minTotal, setMinTotal] = useState(0);
-  const [maxTotal, setMaxTotal] = useState(5);
-  const [total, setTotal] = useState(minTotal);
+  const [minCount, setMinCount] = useState(0);
+  const [maxCount, setMaxCount] = useState(5);
+  const [count, setCount] = useState(minCount);
 
   const incrementHandler = () => {
-    setTotal(total + 1);
+    setCount(count + 1);
   };
 
   const resetHandler = () => {
-    setTotal(0);
-    setMinTotal(0);
-    setMaxTotal(5);
+    setCount(0);
+    setMinCount(0);
+    setMaxCount(5);
   };
   const modalSetHandler = () => {
     setModalToggle(!modalToggle);
@@ -25,31 +26,29 @@ export default function App2() {
     <>
       {modalToggle ? (
         <Modal
-          totalProp={total}
-          setTotalProp={setTotal}
-          minTotalProp={minTotal}
-          maxTotalProp={maxTotal}
-          setMinTotalProp={setMinTotal}
-          setMaxTotalProp={setMaxTotal}
+          countProp={count}
+          setCountProp={setCount}
+          minCountProp={minCount}
+          maxCountProp={maxCount}
+          setMinCountProp={setMinCount}
+          setMaxCountProp={setMaxCount}
           modalToggleProp={setModalToggle}
         ></Modal>
       ) : (
-        // ============================ в отдельный компонент трохи пожже
         <div>
-          <h1 style={{ color: total === maxTotal ? "red" : "" }}>{total}</h1>
+          <Screen count={count}></Screen>
           <Button
             title={"inc"}
             callBack={incrementHandler}
-            disabled={total === maxTotal ? true : false}
+            disabled={count === maxCount ? true : false}
           ></Button>
           <Button
             title={"reset"}
             callBack={resetHandler}
-            disabled={total === 0 ? true : false}
+            disabled={count === 0 ? true : false}
           ></Button>
           <Button title={"set"} callBack={modalSetHandler}></Button>
         </div>
-        // ============================ в отдельный компонент трохи пожже
       )}
     </>
   );

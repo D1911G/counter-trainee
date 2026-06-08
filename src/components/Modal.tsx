@@ -2,55 +2,54 @@ import React, { useState, type ChangeEvent } from "react";
 import Button from "./Button";
 
 type ModalPropsType = {
-  totalProp: number;
-  setTotalProp: (number) => void;
-  minTotalProp: number;
-  maxTotalProp: number;
-  setMinTotalProp: (number) => void;
-  setMaxTotalProp: (number) => void;
+  countProp: number;
+  setCountProp: (number) => void;
+  minCountProp: number;
+  maxCountProp: number;
+  setMinCountProp: (number) => void;
+  setMaxCountProp: (number) => void;
   modalToggleProp: (boolean) => void;
 };
 
 export default function Modal(props: ModalPropsType) {
-  const [minTotalM, setMinTotalM] = useState(0);
-  const [maxTotalM, setMaxTotalM] = useState(5);
-  //   const [error, setError] = useState(false);
+  const [minCountM, setMinCountM] = useState(0);
+  const [maxCountM, setMaxCountM] = useState(5);
 
   return (
     <>
       <div>
         <input
-          placeholder="set new max total"
+          placeholder="set new max count"
           type="number"
-          value={maxTotalM}
+          value={maxCountM}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setMaxTotalM(Number(e.target.value));
+            setMaxCountM(Number(e.target.value));
           }}
         ></input>
         <input
-          placeholder="set new min total"
+          placeholder="set new min count"
           type="number"
-          value={minTotalM}
+          value={minCountM}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setMinTotalM(Number(e.target.value));
+            setMinCountM(Number(e.target.value));
           }}
           style={{
-            border: minTotalM > maxTotalM ? "1px solid red" : "",
+            border: minCountM > maxCountM ? "1px solid red" : "",
           }}
         ></input>
       </div>
       <p style={{ color: "red" }}>
-        {minTotalM > maxTotalM && "Please, write correct value"}
+        {minCountM > maxCountM && "Please, write correct value"}
       </p>
       <Button
         title={"set"}
         callBack={() => {
-          props.setMaxTotalProp(maxTotalM);
-          props.setMinTotalProp(minTotalM);
+          props.setMaxCountProp(maxCountM);
+          props.setMinCountProp(minCountM);
           props.modalToggleProp(false);
-          props.setTotalProp(minTotalM);
+          props.setCountProp(minCountM);
         }}
-        disabled={minTotalM > maxTotalM || minTotalM < 0 ? true : false}
+        disabled={minCountM > maxCountM || minCountM < 0 ? true : false}
       ></Button>
       <Button
         title={"cancel"}
