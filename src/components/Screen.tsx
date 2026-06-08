@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function Screen({ count }) {
+type ScreenPropsType = {
+  count: number;
+  maxCount?: number;
+};
+
+export default function Screen({ count, maxCount }: ScreenPropsType) {
   // total → counter
-  return <h1 style={{ color: count === 5 ? "red" : "" }}>{count}</h1>;
+  return <h1 style={{ color: count === maxCount ? "red" : "" }}>{count}</h1>;
 }
