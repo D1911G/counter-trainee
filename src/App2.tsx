@@ -1,8 +1,7 @@
 import { useState } from "react";
-
 import Modal from "./components/Modal";
-
 import Counter from "./components/Counter";
+import "./App.css";
 
 export default function App2() {
   const [modalToggle, setModalToggle] = useState(false);
@@ -11,7 +10,7 @@ export default function App2() {
   const [count, setCount] = useState(minCount);
 
   return (
-    <>
+    <div className="app-container">
       {modalToggle ? (
         <Modal
           countProp={count}
@@ -21,7 +20,7 @@ export default function App2() {
           setMinCountProp={setMinCount}
           setMaxCountProp={setMaxCount}
           modalToggleProp={setModalToggle}
-        ></Modal>
+        />
       ) : (
         <Counter
           countProp={count}
@@ -31,8 +30,8 @@ export default function App2() {
           setMinCountProp={setMinCount}
           setMaxCountProp={setMaxCount}
           modalToggleProp={setModalToggle}
-        ></Counter>
+        />
       )}
-    </>
+    </div>
   );
 }

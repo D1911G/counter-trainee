@@ -16,45 +16,55 @@ export default function Modal(props: ModalPropsType) {
   const [maxCountM, setMaxCountM] = useState(5);
 
   return (
-    <>
-      <div>
-        <input
-          placeholder="set new max count"
-          type="number"
-          value={maxCountM}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setMaxCountM(Number(e.target.value));
-          }}
-        ></input>
-        <input
-          placeholder="set new min count"
-          type="number"
-          value={minCountM}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setMinCountM(Number(e.target.value));
-          }}
-          style={{
-            border: minCountM > maxCountM ? "1px solid red" : "",
-          }}
-        ></input>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h2 className="modal-title">Настройки счетчика</h2>
+        <div className="modal-input-group">
+          <label>Минимальное значение</label>
+          <input
+            type="number"
+            value={minCountM}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setMinCountM(Number(e.target.value));
+            }}
+            className={`modal-input ${minCountM > maxCountM ? "modal-input-error" : ""}`}
+          />
+        </div>
+        <div className="modal-input-group">
+          <label>Максимальное значение</label>
+          <input
+            type="number"
+            value={maxCountM}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setMaxCountM(Number(e.target.value));
+            }}
+            className="modal-input"
+          />
+        </div>
+        {minCountM > maxCountM && (
+          <div className="error-message">
+            ⚠️ Минимум не может быть больше максимума!
+          </div>
+        )}
+        <div className="modal-buttons">
+          <Button
+            title={"Сохранить"}
+            callBack={() => {
+              props.setMaxCountProp(maxCountM);
+              props.setMinCountProp(minCountM);
+              props.modalToggleProp(false);
+              props.setCountProp(minCountM);
+            }}
+            disabled={minCountM > maxCountM || minCountM < 0}
+            className="btn-set"
+          />
+          <Button
+            title={"Отмена"}
+            callBack={() => props.modalToggleProp(false)}
+            className="btn-reset"
+          />
+        </div>
       </div>
-      <p style={{ color: "red" }}>
-        {minCountM > maxCountM && "Please, write correct value"}
-      </p>
-      <Button
-        title={"set"}
-        callBack={() => {
-          props.setMaxCountProp(maxCountM);
-          props.setMinCountProp(minCountM);
-          props.modalToggleProp(false);
-          props.setCountProp(minCountM);
-        }}
-        disabled={minCountM > maxCountM || minCountM < 0 ? true : false}
-      ></Button>
-      <Button
-        title={"cancel"}
-        callBack={() => props.modalToggleProp(false)}
-      ></Button>
-    </>
+    </div>
   );
 }

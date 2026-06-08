@@ -2,6 +2,7 @@ type ButtonPropsType = {
   title: string;
   callBack?: () => void;
   disabled?: boolean;
+  className?: string;
 };
 
 export default function Button(props: ButtonPropsType) {
@@ -10,7 +11,11 @@ export default function Button(props: ButtonPropsType) {
   };
 
   return (
-    <button onClick={handler} disabled={props.disabled}>
+    <button
+      onClick={handler}
+      disabled={props.disabled}
+      className={`btn ${props.className || ""}`}
+    >
       {props.title}
     </button>
   );

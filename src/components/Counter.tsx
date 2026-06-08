@@ -1,6 +1,6 @@
 import React from "react";
-import Screen from "./Screen";
 import Button from "./Button";
+import Screen from "./Screen";
 
 type CounterPropsType = {
   countProp: number;
@@ -35,19 +35,23 @@ export default function Counter({
   };
 
   return (
-    <div>
-      <Screen count={countProp} maxCount={maxCountProp}></Screen>
-      <Button
-        title={"inc"}
-        callBack={incrementHandler}
-        disabled={countProp === maxCountProp ? true : false}
-      ></Button>
-      <Button
-        title={"reset"}
-        callBack={resetHandler}
-        disabled={countProp === 0 ? true : false}
-      ></Button>
-      <Button title={"set"} callBack={modalSetHandler}></Button>
+    <div className="counter-card">
+      <Screen count={countProp} maxCount={maxCountProp} />
+      <div className="button-group">
+        <Button
+          title={"inc"}
+          callBack={incrementHandler}
+          disabled={countProp === maxCountProp}
+          className="btn-inc"
+        />
+        <Button
+          title={"reset"}
+          callBack={resetHandler}
+          disabled={countProp === 0}
+          className="btn-reset"
+        />
+        <Button title={"set"} callBack={modalSetHandler} className="btn-set" />
+      </div>
     </div>
   );
 }
